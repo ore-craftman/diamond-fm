@@ -11,6 +11,10 @@
   "keywords": [
     "mern"
   ],
+  "engines": {
+        "npm": "6.14.15",
+        "node": "14.18.1"
+      },
   "author": "oreoluwa",
   "license": "ISC",
   "dependencies": {
