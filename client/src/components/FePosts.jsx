@@ -36,9 +36,6 @@ const FePosts = () => {
     });
   }, [type]);
 
-  // console.log(posts);
-  // console.log(type);
-
   return (
     <div>
       <Header programmes={programmes} />

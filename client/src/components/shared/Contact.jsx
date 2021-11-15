@@ -73,14 +73,14 @@ const Contact = ({ onlyContact }) => {
           <Col sm={12} md={6} lg={8}>
             <Image src="/media/contact.png" rounded style={{ width: "100%" }} />
 
-            <div className="d-flex align-items-center mt-4 justify-content-between">
-              <div className="border-start px-2">
+            <div className=" d-md-flex align-items-center mt-4 justify-content-between">
+              <div className="border-start px-2 my-4 my-md-1">
                 <h4>Address</h4>
                 <p className="text-secondary">
                   Plot 2, New Yidi Road, Ilorin Kwara State Nigeria
                 </p>
               </div>
-              <div className="border-start px-2">
+              <div className="border-start px-2 my-4 my-md-1">
                 <h4>Social pages</h4>
                 <a
                   href="#mail"
@@ -105,7 +105,7 @@ const Contact = ({ onlyContact }) => {
                   Instagram
                 </a>
               </div>
-              <div className="border-start px-2">
+              <div className="border-start px-2 my-4 my-md-1">
                 <h4>Dial</h4>
                 <a
                   href="tel:+2349136556952"

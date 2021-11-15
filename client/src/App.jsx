@@ -10,6 +10,8 @@ const SinglePost = lazy(() => import("./components/SinglePost"));
 const Home = lazy(() => import("./components/Home"));
 const Policy = lazy(() => import("./components/Policy"));
 const Contact = lazy(() => import("./components/shared/Contact"));
+const About = lazy(() => import("./components/About"));
+const Presenters = lazy(() => import("./components/Presenters"));
 
 const App = () => {
   return (
@@ -17,7 +19,7 @@ const App = () => {
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/posts/type/:type" component={FePosts} />
+          <Route path="/posts/post/:type" component={FePosts} />
           <Route path="/posts/:id" component={SinglePost} />
           <Route path="/df-new-keymaster" component={Signup} />
           <Route path="/df-login" component={Login} />
@@ -25,6 +27,8 @@ const App = () => {
           <Route path="/df-dashboard" component={Dashboard} />
           <Route path="/privacy-policy" component={Policy} />
           <Route path="/contact" component={Contact} />
+          <Route path="/about" component={About} />
+          <Route path="/presenters" component={Presenters} />
         </Switch>
       </Suspense>
     </Router>

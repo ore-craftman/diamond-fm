@@ -31,7 +31,7 @@ const Footer = ({ posts }) => {
                         <Image
                           src={post.featuredImage}
                           rounded
-                          height="220"
+                          height="250"
                           className="mx-auto my-2"
                           style={{ width: "100%" }}
                         />

@@ -65,7 +65,7 @@ const Header = ({ programmes }) => {
           <header className="w-100 my-3">
             <div className="d-flex align-items-center w-100">
               <Navbar.Brand href="#home" className="d-none d-lg-block">
-                <Image src="/media/logoo.jpeg" rounded width="70" height="70" />
+                <Image src="/media/logoo.jpeg" rounded width="50" height="50" />
               </Navbar.Brand>
               <Navbar.Toggle
                 aria-controls="basic-navbar-nav"
@@ -103,8 +103,8 @@ const Header = ({ programmes }) => {
                           <Image
                             src={currentProgramme.featuredImage}
                             rounded
-                            width="70"
-                            height="70"
+                            width="50"
+                            height="40"
                           />
                         </div>
                         <a
@@ -114,9 +114,14 @@ const Header = ({ programmes }) => {
                           className="text-secondary text-decoration-none"
                         >
                           <div className="ms-2 me-1 me-md-3 ">
-                            <p className="mb-0">Live on air</p>
-                            <p className="mb-1 fw-bolder fs-6">
-                              {currentProgramme.title.slice(0, 30)}
+                            <p className="mb-0" style={{ fontSize: "12px" }}>
+                              Live on air
+                            </p>
+                            <p
+                              className="mb-1 fw-bolder"
+                              style={{ fontSize: "14px" }}
+                            >
+                              {currentProgramme.title.slice(0, 12) + "..."}
                             </p>
                           </div>
                         </a>
@@ -126,20 +131,20 @@ const Header = ({ programmes }) => {
                           className="d-flex flex-nowrap me-3"
                         >
                           <a
-                            href="/posts/type/airProgramme"
+                            href="/posts/poost/airProgramme"
                             style={{ color: "#F9474E" }}
                             className="mb-0 text-decoration-none"
                           >
-                            Next programme
+                            Next
                           </a>
-                          <i className="bi bi-arrow-right"></i>
+                          <i className="bi bi-arrow-right ms-1"></i>
                         </div>
                       </div>
                     ) : (
                       <Spinner animation="border" className="my-3 ms-3" />
                     )}
 
-                    <div className="d-none d-md-flex align-items-center flex-nowrap me-3">
+                    <div className="d-none d-md-flex align-items-center flex-nowrap ms-auto">
                       <a
                         href="https://www.facebook.com/diamond887fm/"
                         target="_blank"
@@ -176,13 +181,13 @@ const Header = ({ programmes }) => {
                 style={{ width: "89%", maxWidth: "100%" }}
               >
                 <Nav.Link href="/">HOME</Nav.Link>
-                <Nav.Link href="#about">ABOUT US</Nav.Link>
-                <Nav.Link href="/posts/type/airProgramme">PROGRAMME</Nav.Link>
-                <Nav.Link href="/posts/type/news">NEWS</Nav.Link>
-                <Nav.Link href="/posts/type/blog">BLOG</Nav.Link>
-                <Nav.Link href="/posts/type/sport">SPORT</Nav.Link>
+                <Nav.Link href="/about">ABOUT US</Nav.Link>
+                <Nav.Link href="/posts/post/airProgramme">PROGRAMME</Nav.Link>
+                <Nav.Link href="/posts/post/news">NEWS</Nav.Link>
+                <Nav.Link href="/posts/post/blog">BLOG</Nav.Link>
+                <Nav.Link href="/posts/post/sport">SPORT</Nav.Link>
                 <Nav.Link href="/privacy-policy">PRIVACY POLICY</Nav.Link>
-                {/* <Nav.Link href="/gallery">GALLERY</Nav.Link> */}
+                <Nav.Link href="/presenters">PRESENTERS</Nav.Link>
                 <Nav.Link href="/contact">CONTACT US</Nav.Link>
               </Nav>
             </Navbar.Collapse>

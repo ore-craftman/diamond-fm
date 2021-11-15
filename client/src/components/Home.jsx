@@ -67,7 +67,7 @@ const Home = () => {
                   </p>
 
                   <a
-                    href="/posts/programmes"
+                    href="/posts/post/airProgramme"
                     className="btn my-2 btn-info text-white"
                   >
                     SEE PROGRAMMES
@@ -159,7 +159,7 @@ const Home = () => {
                         <Image
                           src={post.featuredImage}
                           rounded
-                          height="220"
+                          height="250"
                           className="mx-auto my-2 shadow"
                           style={{ width: "100%" }}
                         />
@@ -239,7 +239,7 @@ const Home = () => {
           </Row>
         </Container>
 
-        <Container className="my-5">
+        {/* <Container className="my-5">
           <ScrollAnimation
             animateIn="fadeInLeft"
             duration={3}
@@ -513,7 +513,7 @@ const Home = () => {
               </div>
             </Col>
           </Row>
-        </Container>
+        </Container> */}
 
         <div
           style={{
