@@ -131,7 +131,7 @@ const Header = ({ programmes }) => {
                           className="d-flex flex-nowrap me-3"
                         >
                           <a
-                            href="/posts/poost/airProgramme"
+                            href="/posts/post/airProgramme"
                             style={{ color: "#F9474E" }}
                             className="mb-0 text-decoration-none"
                           >
