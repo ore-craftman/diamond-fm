@@ -5,7 +5,7 @@ const postService = require("../services/post");
 // Get all post /posts/
 router.get("/", async (req, res) => {
   posts = await postService.getAllPosts();
-  if (posts[0]) {
+  if (posts && posts[0]) {
     res.json({ status: true, posts: posts[1] });
   } else {
     res.json({ status: false, message: posts[1] });
