@@ -23,8 +23,10 @@ router.post("/create", async (req, res) => {
     programmeDate,
     featuredDesc,
     pending,
+    comments,
   } = req.body;
 
+  const currentDate = new Date();
   postData = {
     title,
     body,
@@ -35,6 +37,8 @@ router.post("/create", async (req, res) => {
     audio: req.body.audio ? req.body.audio : null,
     programmeDate,
     pending,
+    comments,
+    createdAt: currentDate.toISOString(),
   };
 
   const post = await postService.create(postData);
