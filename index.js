@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const client = require("./db-connection");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
@@ -26,18 +26,34 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
-  })
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect(process.env.MONGODB_URI)
+//   .then(() => {
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
+//   })
+//   .catch((err) => console.log(err));
+
+app.get("/test", async (req, res) => {
+  await client.connect();
+
+  // Select collection
+  const postCollection = client.db("diamond_fm").collection("posts");
+
+  const post = await postCollection.find({}).toArray();
+  // const post = await postCollection.findOne({
+  //   title: "Now named air Prog",
+  // });
+
+  res.json({ post });
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 app.use(morgan("combined"));
-
-
 
 // Routes
 const usersRoutes = require("./routes/user");
@@ -45,7 +61,6 @@ const postsRoutes = require("./routes/post");
 
 app.use("/posts", postsRoutes);
 app.use("/users", usersRoutes);
-
 
 // Serve react build on production
 if (process.env.NODE_ENV === "production") {

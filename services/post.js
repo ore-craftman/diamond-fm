@@ -1,4 +1,5 @@
 const Post = require("../models/posts");
+const client = require("../db-connection");
 
 // Post data should be an object of{
 //   title: postTitle,
@@ -28,7 +29,13 @@ const create = async (data) => {
 
 const getAllPosts = async () => {
   try {
-    const posts = await Post.find({}).lean();
+    await client.connect();
+
+    // Select collection
+    const postCollection = client.db("diamond_fm").collection("posts");
+    const posts = await postCollection.find({}).toArray();
+
+    // const posts = await Post.find({}).lean();
     if (posts.length > 0) {
       return [true, posts];
     } else {
