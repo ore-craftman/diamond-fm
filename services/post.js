@@ -36,7 +36,7 @@ const getAllPosts = async () => {
     const posts = await postCollection.find({}).toArray();
 
     // const posts = await Post.find({}).lean();
-    if (posts.length > 0) {
+    if (posts && posts.length > 0) {
       return [true, posts];
     } else {
       return [false, "No data to retrieve"];
