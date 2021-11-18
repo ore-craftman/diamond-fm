@@ -37,7 +37,7 @@ router.post("/create", async (req, res) => {
     audio: req.body.audio ? req.body.audio : null,
     programmeDate,
     pending,
-    comments,
+    comments: [],
     createdAt: currentDate.toISOString(),
   };
 

@@ -35,20 +35,6 @@ app.use((req, res, next) => {
 //   })
 //   .catch((err) => console.log(err));
 
-app.get("/test", async (req, res) => {
-  await client.connect();
-
-  // Select collection
-  const postCollection = client.db("diamond_fm").collection("posts");
-
-  const post = await postCollection.find({}).toArray();
-  // const post = await postCollection.findOne({
-  //   title: "Now named air Prog",
-  // });
-
-  res.json({ post });
-});
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

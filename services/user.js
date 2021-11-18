@@ -1,5 +1,6 @@
-const User = require("../models/users");
 const bcrypt = require("bcrypt");
+const client = require("../db-connection");
+const { ObjectId } = require("mongodb");
 
 const create = async (
   firstname,
@@ -11,10 +12,15 @@ const create = async (
   canPublish
 ) => {
   const hashSalt = await bcrypt.genSalt(10);
+  await client.connect();
+  // Select collection
+  const userCollection = client.db("diamond_fm").collection("users");
   try {
-    if (await User.exists({ email: email })) {
+    const oldUser = await userCollection.findOne({ email: email });
+    if (oldUser) {
       return [false, "Account with email exists"];
     } else {
+      const currentDate = new Date();
       const userData = {
         firstname: firstname,
         lastname: lastname,
@@ -25,13 +31,17 @@ const create = async (
         role: role,
         avatar: avatar,
         canPublish,
+        notifications: [],
+        createdAt: currentDate.toISOString(),
       };
 
-      const user = await User.create(userData);
-      if (user) {
-        return [true, user];
-      } else {
+      const response = await userCollection.insertOne(userData);
+
+      if (!response.acknowledged) {
         return [false, "Oops!! seems account with email exists"];
+      } else {
+        const user = await userCollection.findOne({ _id: response.insertedId });
+        return [true, user];
       }
     }
   } catch (err) {
@@ -42,7 +52,12 @@ const create = async (
 
 const authenticate = async (email, password) => {
   try {
-    const user = await User.findOne({ email: email });
+    await client.connect();
+
+    // Select collection
+    const userCollection = client.db("diamond_fm").collection("users");
+    const user = await userCollection.findOne({ email: email });
+
     if (!user) {
       return [false, "Email not registered"];
     } else {
@@ -62,7 +77,12 @@ const authenticate = async (email, password) => {
 
 const getAllUsers = async () => {
   try {
-    const users = await User.find({});
+    await client.connect();
+
+    // Select collection
+    const userCollection = client.db("diamond_fm").collection("users");
+    const users = await userCollection.find({}).toArray();
+
     if (users.length > 0) {
       return [true, users];
     } else {
@@ -75,7 +95,12 @@ const getAllUsers = async () => {
 
 const getById = async (id) => {
   try {
-    const user = await User.findById(id).exec();
+    const doc_id = new ObjectId(id);
+    await client.connect();
+
+    // Select collection
+    const userCollection = client.db("diamond_fm").collection("users");
+    const user = await userCollection.findOne({ _id: doc_id });
     if (user) {
       return [true, user];
     } else {
@@ -87,7 +112,12 @@ const getById = async (id) => {
 };
 
 const getByEmail = async (email) => {
-  const user = await User.findOne({ email: email });
+  await client.connect();
+
+  // Select collection
+  const userCollection = client.db("diamond_fm").collection("users");
+  const user = await userCollection.findOne({ email: email });
+
   if (!user) {
     return [false, "Account not found"];
   } else {
@@ -96,7 +126,18 @@ const getByEmail = async (email) => {
 };
 
 const updateData = async (id, data) => {
-  const updated = await User.updateOne({ _id: id }, data);
+  const doc_id = new ObjectId(id);
+  await client.connect();
+
+  // Select collection
+  const userCollection = client.db("diamond_fm").collection("users");
+  const updated = await userCollection.updateOne(
+    { _id: doc_id },
+    { $set: data },
+    { upsert: true }
+  );
+
+  // const updated = await User.updateOne({ _id: id }, data);
   if (updated.modifiedCount > 0) {
     return [true, "User updated successfully"];
   } else {
@@ -105,7 +146,12 @@ const updateData = async (id, data) => {
 };
 
 const updatePassword = async (id, newPassword) => {
-  const user = await User.findOne({ _id: id });
+  await client.connect();
+
+  // Select collection
+  const userCollection = client.db("diamond_fm").collection("users");
+  const doc_id = new ObjectId(id);
+  const user = await userCollection.findOne({ _id: doc_id });
 
   if (!user) {
     return [false, "No user with the specified id"];
@@ -113,12 +159,13 @@ const updatePassword = async (id, newPassword) => {
     const hashSalt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(newPassword, hashSalt);
 
-    const passwordUpdated = await User.updateOne(
-      { _id: id },
-      { salt: hashSalt, password: passwordHash }
+    const updated = await userCollection.updateOne(
+      { _id: doc_id },
+      { $set: { salt: hashSalt, password: passwordHash } },
+      { upsert: true }
     );
 
-    if (passwordUpdated.modifiedCount > 0) {
+    if (updated.modifiedCount > 0) {
       return [true, "Password updated successfully"];
     } else {
       return [false, "Error updating password"];
@@ -128,7 +175,12 @@ const updatePassword = async (id, newPassword) => {
 
 const deleteUser = async (id) => {
   try {
-    await User.findByIdAndDelete(id);
+    const doc_id = new ObjectId(id);
+    await client.connect();
+
+    // Select collection
+    const userCollection = client.db("diamond_fm").collection("users");
+    await userCollection.deleteOne({ _id: doc_id });
   } catch (err) {
     console.error(err);
   }

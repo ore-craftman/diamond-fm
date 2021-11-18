@@ -1,4 +1,3 @@
-const Post = require("../models/posts");
 const client = require("../db-connection");
 const { ObjectId } = require("mongodb");
 
