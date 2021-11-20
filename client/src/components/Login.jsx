@@ -144,11 +144,7 @@ const Login = () => {
                           )}
                         </Button>
                       </Col>
-                      <Col>
-                        <p>
-                          New Here? <a href="/df-new-keymaster">Sign Up</a>
-                        </p>
-                      </Col>
+                      <Col></Col>
                     </Row>
                     <Row>
                       <p>

@@ -21,7 +21,9 @@ const Contact = ({ onlyContact }) => {
   const [postsError, setPostsError] = useState(null);
 
   useEffect(() => {
-    document.title = "Home | DiamondFM";
+    if (document.title !== "Home | DiamondFM") {
+      document.title = "Contact | DiamondFM";
+    }
 
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
@@ -69,60 +71,16 @@ const Contact = ({ onlyContact }) => {
       )}
 
       <Container className="my-5">
-        <Row className="align-items-end">
+        <Row className="align-items-start mt-md-5">
           <Col sm={12} md={6} lg={8}>
-            <Image src="/media/contact.png" rounded style={{ width: "100%" }} />
-
-            <div className=" d-md-flex align-items-center mt-4 justify-content-between">
-              <div className="border-start px-2 my-4 my-md-1">
-                <h4>Address</h4>
-                <p className="text-secondary">
-                  Plot 2, New Yidi Road, Ilorin Kwara State Nigeria
-                </p>
-              </div>
-              <div className="border-start px-2 my-4 my-md-1">
-                <h4>Social pages</h4>
-                <a
-                  href="#mail"
-                  className="text-secondary d-block text-decoration-none"
-                >
-                  Mail
-                </a>
-                <a
-                  href="https://www.facebook.com/diamond887fm/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-secondary d-block text-decoration-none"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="https://instagram.com/diamond887fm/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-secondary d-block text-decoration-none"
-                >
-                  Instagram
-                </a>
-              </div>
-              <div className="border-start px-2 my-4 my-md-1">
-                <h4>Dial</h4>
-                <a
-                  href="tel:+2349136556952"
-                  className="text-secondary d-block text-decoration-none"
-                >
-                  +234 913 655 6952
-                </a>
-                <a
-                  href="tel:+2346952913655"
-                  className="text-secondary d-block text-decoration-none"
-                >
-                  +234 695 291 3655
-                </a>
-              </div>
-            </div>
+            <Image
+              src="/media/contact.png"
+              className="mb-3"
+              rounded
+              style={{ width: "100%" }}
+            />
           </Col>
-          <Col className="mt-md-4">
+          <Col>
             <h2 className="fw-bolder fs-1">GET IN TOUCH</h2>
             <p className="fs-5 mb-0">
               Have an inquiry or feedback for us? Fill out the form below to
@@ -187,6 +145,57 @@ const Contact = ({ onlyContact }) => {
               </Form>
             </div>
           </Col>
+        </Row>
+
+        <Row>
+          <div className=" d-md-flex align-items-center mt-4 justify-content-between">
+            <div className="border-start px-2 my-4 my-md-1">
+              <h4>Address</h4>
+              <p className="text-secondary">
+                Plot 2, New Yidi Road, Ilorin Kwara State Nigeria
+              </p>
+            </div>
+            <div className="border-start px-2 my-4 my-md-1">
+              <h4>Social pages</h4>
+              <a
+                href="#mail"
+                className="text-secondary d-block text-decoration-none"
+              >
+                Mail
+              </a>
+              <a
+                href="https://www.facebook.com/diamond887fm/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary d-block text-decoration-none"
+              >
+                Facebook
+              </a>
+              <a
+                href="https://instagram.com/diamond887fm/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary d-block text-decoration-none"
+              >
+                Instagram
+              </a>
+            </div>
+            <div className="border-start px-2 my-4 my-md-1">
+              <h4>Dial</h4>
+              <a
+                href="tel:+2349136556952"
+                className="text-secondary d-block text-decoration-none"
+              >
+                +234 913 655 6952
+              </a>
+              <a
+                href="tel:+2346952913655"
+                className="text-secondary d-block text-decoration-none"
+              >
+                +234 695 291 3655
+              </a>
+            </div>
+          </div>
         </Row>
       </Container>
 

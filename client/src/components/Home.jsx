@@ -133,7 +133,6 @@ const Home = () => {
                       className="d-flex flex-nowrap justify-content-between align-items-center shadow bg-white w-100 p-3 my-4 rounded"
                     >
                       <div className="d-flex align-items-center flex-nowrap">
-                        {/* <h3 className="fw-bolder me-2">03 OCT</h3> */}
                         <div className="d-flex align-items-center flex-nowrap">
                           <Image
                             src="/media/aboutCenter.png"
@@ -190,12 +189,7 @@ const Home = () => {
             }}
           >
             <Row className="align-items-center px-2 px-md-3 px-lg-4">
-              <Col
-                className="d-none d-md-flex"
-                // style={{ backgroundImage: "url('/media/appMockup.png')" }}
-              >
-                {/* <Image src="/media/appMockup.png" style={{ width: "100" }} /> */}
-              </Col>
+              <Col className="d-none d-md-flex"></Col>
 
               <Col sm={12} md={6}>
                 <section>
@@ -208,14 +202,14 @@ const Home = () => {
 
                   <div className="d-flex align-items-center flex-nowrap">
                     <a
-                      href="#app_store"
+                      href="https://apps.apple.com/id/app/diamond-88-7-fm-ilorin/id1559560673"
                       className="btn my-2 btn-info text-white"
                     >
                       <i className="bi h4 text-white bi-apple"></i>
                       App Store
                     </a>
                     <a
-                      href="#play_store"
+                      href="https://play.google.com/store/apps/details?id=com.diamondfm.diamond_fm_service&hl=en&gl=US"
                       className="btn my-2 mx-2 btn-info text-white"
                     >
                       <i className="bi h4 text-white bi-play-fill"></i>

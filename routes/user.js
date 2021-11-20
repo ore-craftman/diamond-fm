@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 
   if (user[0]) {
     res.json({ status: user[0], user: user[1] });
-    const emailConfirmationLink = `http://localhost:4000/users/account/activate/${user[1]._id}`;
+    const emailConfirmationLink = `https://diamondfm.net/users/account/activate/${user[1]._id}`;
 
     const mailOptions = {
       from: "diamond.fm@outlook.com",
@@ -73,15 +73,12 @@ router.get("/account/activate/:id", async (req, res) => {
     });
 
     if (dataUpdated[0]) {
-      res.json({ status: true, message: "Email confirmed successfully" });
+      res.send("Email confirmed successfully");
     } else {
-      res.json({ status: false, message: "Error updating confirmedEmail" });
+      res.send("Oops... Error updating activating account");
     }
   } else {
-    res.json({
-      status: false,
-      message: "Invalid link, be sure to use the link sent via email",
-    });
+    res.send("Invalid link, be sure to use the link sent via email");
   }
 });
 
