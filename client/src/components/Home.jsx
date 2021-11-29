@@ -11,6 +11,7 @@ import Contact from "./shared/Contact";
 import Footer from "./shared/Footer";
 import Covid from "./shared/Covid";
 import Weather from "./shared/Weather";
+import Carousel from "react-bootstrap/Carousel";
 const axios = require("axios");
 
 const Home = () => {
@@ -48,34 +49,102 @@ const Home = () => {
 
         <Container>
           <ScrollAnimation animateIn="slideInDown" animateOut="slideOutUp">
-            <Row
-              style={{
-                backgroundImage: "url('/media/hero.png')",
-                backgroundPosition: "center center",
-                backgroundSize: "cover",
-                height: "40vh",
-              }}
-              className="rounded align-items-center px-2 px-md-3 px-lg-4 mb-5"
-            >
-              <Col sm={12} md={8} lg={6}>
-                <section>
-                  <p className="text-end mb-0 text-white">88.7 ILORIN</p>
-                  <h2 className="fw-bolder fs-1 text-white">Diamond FM</h2>
-                  <p className="fs-5 mb-0 text-white">
-                    Get quick updates on relevant happenings around you when you
-                    listen to Diamond FM
-                  </p>
+            <Carousel interval={1500} prevIcon={false}>
+              <Carousel.Item>
+                <Row
+                  style={{
+                    backgroundImage: "url('/media/hero.png')",
+                    backgroundPosition: "center center",
+                    backgroundSize: "cover",
+                    height: "40vh",
+                    borderRadius: "10px",
+                  }}
+                  className="rounded align-items-center px-2 px-md-3 px-lg-4 mb-5"
+                >
+                  <Col sm={12} md={8} lg={6}>
+                    <section>
+                      <p className="text-end mb-0 text-white">88.7 ILORIN</p>
+                      <h2 className="fw-bolder fs-1 text-white">Diamond FM</h2>
+                      <p className="fs-5 mb-0 text-white">
+                        Get quick updates on relevant happenings around you when
+                        you listen to Diamond FM
+                      </p>
 
-                  <a
-                    href="/posts/post/airProgramme"
-                    className="btn my-2 btn-info text-white"
-                  >
-                    SEE PROGRAMMES
-                  </a>
-                </section>
-              </Col>
-              <Col className="d-none d-md-flex"></Col>
-            </Row>
+                      <a
+                        href="/posts/post/airProgramme"
+                        className="btn my-2 btn-info text-white"
+                      >
+                        SEE PROGRAMMES
+                      </a>
+                    </section>
+                  </Col>
+                  <Col className="d-none d-md-flex"></Col>
+                </Row>
+              </Carousel.Item>
+
+              <Carousel.Item>
+                <Row
+                  style={{
+                    backgroundImage: "url('/media/slide_0.jpeg')",
+                    backgroundPosition: "center center",
+                    backgroundSize: "cover",
+                    height: "40vh",
+                    borderRadius: "10px",
+                  }}
+                  className="rounded align-items-center px-2 px-md-3 px-lg-4 mb-5"
+                >
+                  <Col sm={12} md={8} lg={6}>
+                    <section>
+                      <p className="text-end mb-0 text-white">88.7 ILORIN</p>
+                      <h2 className="fw-bolder fs-1 text-white">Diamond FM</h2>
+                      <p className="fs-5 mb-0 text-white">
+                        Get quick updates on relevant happenings around you when
+                        you listen to Diamond FM
+                      </p>
+
+                      <a
+                        href="/posts/post/airProgramme"
+                        className="btn my-2 btn-info text-white"
+                      >
+                        SEE PROGRAMMES
+                      </a>
+                    </section>
+                  </Col>
+                  <Col className="d-none d-md-flex"></Col>
+                </Row>
+              </Carousel.Item>
+              <Carousel.Item>
+                <Row
+                  style={{
+                    backgroundImage: "url('/media/slide_1.jpeg')",
+                    backgroundPosition: "center center",
+                    backgroundSize: "cover",
+                    height: "40vh",
+                    borderRadius: "10px",
+                  }}
+                  className="rounded align-items-center px-2 px-md-3 px-lg-4 mb-5"
+                >
+                  <Col sm={12} md={8} lg={6}>
+                    <section>
+                      <p className="text-end mb-0 text-white">88.7 ILORIN</p>
+                      <h2 className="fw-bolder fs-1 text-white">Diamond FM</h2>
+                      <p className="fs-5 mb-0 text-white">
+                        Get quick updates on relevant happenings around you when
+                        you listen to Diamond FM
+                      </p>
+
+                      <a
+                        href="/posts/post/airProgramme"
+                        className="btn my-2 btn-info text-white"
+                      >
+                        SEE PROGRAMMES
+                      </a>
+                    </section>
+                  </Col>
+                  <Col className="d-none d-md-flex"></Col>
+                </Row>
+              </Carousel.Item>
+            </Carousel>
           </ScrollAnimation>
         </Container>
 
