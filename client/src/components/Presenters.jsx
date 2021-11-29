@@ -180,38 +180,7 @@ const Presenters = () => {
               </a>
             </div>
           </Col>
-          <Col
-            xs={12}
-            md={4}
-            xl={3}
-            className="bg-white rounded py-4 px-2 m-0  d-flex flex-column justify-content-center"
-          >
-            <Image
-              src="/media/tariq_alimi.png"
-              roundedCircle
-              className="mx-auto"
-              width="171"
-              height="170"
-            />
-            <p className="fw-bold mt-2 mx-auto h4">Tariq Alimi</p>
-            <div className="d-flex flex-nowrap align-items-center justify-content-around">
-              <a href="#meta" target="_blank" rel="noreferrer">
-                <i className="bi bi-facebook h4 text-info mx-2"></i>
-              </a>
-              <a href="#insta" target="_blank" rel="noreferrer">
-                <i className="bi bi-instagram h4 mx-2 text-info"></i>
-              </a>
 
-              <a
-                href="#twitter"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded p-2"
-              >
-                <i className="bi bi-twitter text-info h4 mx-2 "></i>
-              </a>
-            </div>
-          </Col>
           <Col
             xs={12}
             md={4}
@@ -257,7 +226,9 @@ const Presenters = () => {
               width="171"
               height="170"
             />
-            <p className="fw-bold mt-2 mx-auto h4">Tajudeen Akolawole</p>
+            <p className="fw-bold mt-2 mx-auto h4 text-center">
+              Tajudeen Akolawole
+            </p>
             <p className=" mx-auto text-secondary">Ishola</p>
             <div className="d-flex flex-nowrap align-items-center justify-content-around">
               <a href="#meta" target="_blank" rel="noreferrer">

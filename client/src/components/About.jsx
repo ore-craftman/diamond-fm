@@ -50,6 +50,20 @@ const About = () => {
             </h2>
 
             <p>
+              Diamond FM is an urban radio station in Ilorin, Kwara State,
+              Nigeria. Our radio waves cover North Central and South Western
+              Nigerian. We offer exclusive news stories, music and programmes
+              that focus on entertainment, topical issues, community development
+              and corporate social responsibility. We engage our audience in
+              conversations that add value to their lives and contribute to
+              nation-building. Our vision is to continue earning the trust of
+              our audience through quality reportage, standard content
+              production, entertaining and informative programmes and the right
+              business attitude that encourages growth and community
+              development. We are relentless in our resolve to maintain
+              professional and ethical standards.
+            </p>
+            {/* <p>
               Diamond FM is a leading media service provider in Nigeria. We
               offer exclusive topical news stories and programmes. We engage our
               audience in dialogues that add value to their lives and contribute
@@ -59,15 +73,15 @@ const About = () => {
               business attitude that encourages growth and community
               development. We are relentless in our resolve to maintain
               professional and ethical standards.
-            </p>
+            </p> */}
 
-            <p>
+            {/* <p>
               <b>Our workforce</b> is a combination of experienced and young
               people who have the right attitude and are committed to ethical
               and professional standards of the company. Their aspirations and
               goals align with the company’s vision and values. They are our
               most cherished asset and we trust their competencies
-            </p>
+            </p> */}
           </Col>
           <Col sm={12} md={6}>
             <Image
@@ -79,7 +93,7 @@ const About = () => {
         </Row>
       </Container>
 
-      <Container>
+      {/* <Container>
         <p>
           Diamond FM operates on a corporate governance built on democratic
           principles of reciprocal honour, mutual respect, and collective
@@ -155,7 +169,7 @@ const About = () => {
           </li>
           <li>Coordination of recruitment process.</li>
         </ul>
-      </Container>
+      </Container> */}
 
       <Footer posts={posts} />
     </div>
