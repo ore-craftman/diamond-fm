@@ -1,18 +1,6 @@
 const client = require("../db-connection");
 const { ObjectId } = require("mongodb");
 
-// Post data should be an object of{
-//   title: postTitle,
-//   type: postType,
-//   body: postBody,
-//   featuredDesc
-//   audio: audioLink,
-//   createdBy: user,
-//   programmeDate,
-//   pending: userCanPublish ? false : true,
-//   featuredImage,
-// }
-// Non applicable feeds should be set to null
 const create = async (data) => {
   try {
     await client.connect();
@@ -126,7 +114,7 @@ const getByType = async (type) => {
     const posts = await postCollection.find({ type: type }).toArray();
 
     if (!posts || posts.length < 1) {
-      return [false, "No post with the specified type"];
+      return [false, `No ${type} post yet`];
     } else {
       return [true, posts];
     }

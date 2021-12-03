@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   if (posts && posts[0]) {
     res.json({ status: true, posts: posts[1] });
   } else {
-    res.json({ status: false, message: posts[1] });
+    res.json({ status: false, message: posts[1] || "Error retrieving posts" });
   }
 });
 

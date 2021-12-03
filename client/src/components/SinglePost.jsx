@@ -12,6 +12,7 @@ import Covid from "./shared/Covid";
 import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
 import Comment from "./shared/Comment";
+import moment from "moment";
 
 const axios = require("axios");
 
@@ -119,26 +120,20 @@ const SinglePost = () => {
                   </div>
 
                   <div className="m-4">
-                    <p>
-                      {singlePost.createdAt.split("T")[0]} |{" "}
-                      {singlePost.comments.length} comments
+                    <p className="text-secondary mb-0">
+                      {moment(
+                        new Date(singlePost.createdAt.split("T")[0])
+                      ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
+                      | {singlePost.comments.length} comments
                     </p>
 
                     {creator && (
-                      <div className="m-2">
-                        <p className="fw-bolder">Created by</p>
+                      <div className="mb-2">
+                        <p className="text-secondary">
+                          {`By ${creator.firstname + " " + creator.lastname}`}
+                        </p>
 
-                        <Image
-                          src={
-                            creator.avatar !== "null"
-                              ? creator.avatar
-                              : "/media/defaultAvatar.png"
-                          }
-                          width="70"
-                          height="70"
-                          roundedCircle
-                        />
-                        <p>{creator.firstname}</p>
+                        <p></p>
                       </div>
                     )}
 

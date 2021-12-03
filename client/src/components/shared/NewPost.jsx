@@ -59,7 +59,7 @@ const NewPost = () => {
         createdBy: currentUser._id,
         featuredDesc,
         programmeDate: programmeDate !== "" ? programmeDate : null,
-        pending: currentUser.canPublish ? false : true,
+        pending: currentUser.canPublish === true ? false : true,
       };
 
       reader.addEventListener("load", () => {
