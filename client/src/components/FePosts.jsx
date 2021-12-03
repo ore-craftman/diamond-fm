@@ -15,44 +15,51 @@ const axios = require("axios");
 
 const FePosts = () => {
   const [posts, setPosts] = useState(null);
-  const [programmes, setProgrammes] = useState(null);
   const [postsError, setPostsError] = useState(null);
 
   const { type } = useParams();
   useEffect(() => {
     document.title = `${type[0].toUpperCase() + type.slice(1)} | Diamond FM`;
 
-    axios.get("/posts/").then((response) => {
+    axios.get(`/posts/type/${type}`).then((response) => {
       if (response.data.status) {
-        setPosts(
-          response.data.posts.reverse().filter((post) => post.type === type)
-        );
-        setProgrammes(
-          response.data.posts.filter((post) => post.type === "airProgramme")
-        );
+        setPosts(response.data.posts.reverse());
+        // setPosts(
+        //   response.data.posts.reverse().filter((post) => post.type === type)
+        // );
       } else {
         setPostsError(response.data.message);
       }
     });
   }, [type]);
 
+  // console.log(posts, type);
   return (
     <div>
-      <Header programmes={programmes} />
-
-      {postsError && (
-        <Alert variant="warning" className="mx-2">
-          {postsError}
-        </Alert>
-      )}
+      <Header />
 
       <div className="bg-primary my-3 text-white bg-gradient">
         <div className="container py-4">
-          <h4>{type.toUpperCase()}</h4>
-          <p className="mb-0">{`HOME/${type.toUpperCase()}`}</p>
+          <h4>
+            {type === "airProgramme"
+              ? "PROGRAMMES PLAY BACK"
+              : type === "sport"
+              ? "SPORTS"
+              : type.toUpperCase()}
+          </h4>
+          <p className="mb-0">{`HOME / ${
+            type === "airProgramme"
+              ? "PROGRAMMES PLAY BACK"
+              : type.toUpperCase()
+          }${type === "sport" ? "S" : ""}`}</p>
         </div>
       </div>
 
+      {postsError && (
+        <Alert variant="warning" className="mx-2">
+          {postsError.toUpperCase()}
+        </Alert>
+      )}
       <Container>
         <Row className="my-5">
           <Col xs={12} xl={8}>
@@ -86,12 +93,10 @@ const FePosts = () => {
                           {post.createdAt.split("T")[0]} |{" "}
                           {post.comments.length} comments
                         </p>
-                        <h4 className="mb-2">
-                          {post.title.slice(0, 25) + "..."}
-                        </h4>
+                        <h4 className="mb-2">{post.title}</h4>
 
                         <p className="text-secondary">
-                          {post.featuredDesc.slice(0, 45) + "..."}
+                          {post.featuredDesc.slice(0, 55) + "..."}
                         </p>
                         <a
                           href={"/posts/" + post._id}
@@ -106,9 +111,9 @@ const FePosts = () => {
                   );
                 })}
               </div>
-            ) : (
+            ) : !postsError ? (
               <Loader />
-            )}
+            ) : null}
           </Col>
           <Col xs={12} xl={4}>
             <Weather />

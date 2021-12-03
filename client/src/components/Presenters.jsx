@@ -12,7 +12,6 @@ const axios = require("axios");
 
 const Presenters = () => {
   const [posts, setPosts] = useState(null);
-  const [programmes, setProgrammes] = useState(null);
   const [postsError, setPostsError] = useState(null);
 
   useEffect(() => {
@@ -21,11 +20,6 @@ const Presenters = () => {
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts);
-        setProgrammes(
-          response.data.posts
-            .reverse()
-            .filter((post) => post.type === "airProgramme")
-        );
       } else {
         setPostsError(response.data.message);
       }
@@ -34,7 +28,7 @@ const Presenters = () => {
 
   return (
     <div>
-      <Header programmes={programmes} />
+      <Header />
 
       {postsError && (
         <Alert variant="warning" className="mx-2">

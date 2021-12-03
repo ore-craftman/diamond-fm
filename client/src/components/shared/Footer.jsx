@@ -47,9 +47,18 @@ const Footer = ({ posts }) => {
 
       <div style={{ backgroundColor: "#CCDFEC" }}>
         <Container>
-          <p className="mb-0 py-3">
-            &copy; {year.split("T")[0].split("-")[0]} DiamondFM
-          </p>
+          <Row>
+            <Col>
+              <p className="mb-0 py-3">
+                &copy; {year.split("T")[0].split("-")[0]} DiamondFM
+              </p>
+            </Col>
+            <Col>
+              <p className="py-3">
+                <a href="/privacy-policy">Privacy Policy</a>
+              </p>
+            </Col>
+          </Row>
         </Container>
       </div>
     </div>

@@ -2,40 +2,9 @@ import { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Spinner from "react-bootstrap/Spinner";
 import Nav from "react-bootstrap/Nav";
 
-const Header = ({ programmes }) => {
-  let day = new Date().toISOString();
-  let currentDay = day.split("T");
-
-  let currentDayDay = currentDay[0];
-  const [currentProgramme, setCurrentProgramme] = useState(null);
-  const [dayProgrammes, setDayProgrammes] = useState(null);
-  useEffect(() => {
-    if (programmes) {
-      setDayProgrammes(
-        programmes.filter(
-          (programme) =>
-            programme.programmeDate.split("T")[0] === currentDay[0] &&
-            programme.programmeDate.split("T")[1] < currentDay[1]
-        )
-      );
-    }
-  }, [programmes, currentDayDay]);
-
-  //   await dailyProgrammes before loading player
-
-  useEffect(() => {
-    if (dayProgrammes) {
-      if (dayProgrammes.length > 0) {
-        setCurrentProgramme(dayProgrammes[0]);
-      } else {
-        setCurrentProgramme(programmes[0]);
-      }
-    }
-  }, [dayProgrammes, programmes]);
-
+const Header = () => {
   const [playIcon, setPlayIcon] = useState(true);
   const [audioPlayer, setAudioPlayer] = useState(null);
   const playProgramme = (audioAsset) => {
@@ -75,74 +44,66 @@ const Header = ({ programmes }) => {
               <section className="grow-1 w-100 bg-white shadow rounded">
                 <div>
                   <section className="d-flex flex-nowrap justify-content-between align-items-center">
-                    {currentProgramme ? (
-                      <div className="d-flex align-items-center">
-                        <div className="position-relative">
-                          <span
-                            className="rounded-circle p-2 position-absolute top-50 start-50 translate-middle"
-                            style={{ backgroundColor: "#F9474E" }}
-                          >
-                            {playIcon && (
-                              <i
-                                className="bi bi-play-fill text-white"
-                                style={{ cursor: "pointer" }}
-                                onClick={() =>
-                                  playProgramme(currentProgramme.audio)
-                                }
-                              ></i>
-                            )}
-                            {!playIcon && (
-                              <i
-                                className="bi bi-pause-fill text-white"
-                                style={{ cursor: "pointer" }}
-                                onClick={stopProgramme}
-                              ></i>
-                            )}
-                          </span>
-
-                          <Image
-                            src={currentProgramme.featuredImage}
-                            rounded
-                            width="50"
-                            height="40"
-                          />
-                        </div>
-                        <a
-                          href={"/posts/" + currentProgramme._id}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-secondary text-decoration-none"
+                    <div className="d-flex align-items-center">
+                      <div className="position-relative">
+                        <span
+                          className="rounded-circle position-absolute top-50 start-50 translate-middle"
+                          style={{
+                            backgroundColor: "#F9474E",
+                            padding: "0px 2px ",
+                          }}
                         >
-                          <div className="ms-2 me-1 me-md-3 ">
-                            <p className="mb-0" style={{ fontSize: "12px" }}>
-                              Live on air
-                            </p>
-                            <p
-                              className="mb-1 fw-bolder"
-                              style={{ fontSize: "14px" }}
-                            >
-                              {currentProgramme.title.slice(0, 12) + "..."}
-                            </p>
-                          </div>
-                        </a>
+                          {playIcon && (
+                            <i
+                              className="bi bi-play-fill h5 text-white mx-auto"
+                              style={{ cursor: "pointer" }}
+                              onClick={() =>
+                                playProgramme(
+                                  "https://streams.radiomast.io/4b6d766f-3b8a-422a-ab07-822a1738ff2f"
+                                )
+                              }
+                            ></i>
+                          )}
+                          {!playIcon && (
+                            <i
+                              className="bi bi-pause-fill h5 text-white mx-auto"
+                              style={{ cursor: "pointer" }}
+                              onClick={stopProgramme}
+                            ></i>
+                          )}
+                        </span>
 
-                        <div
-                          style={{ color: "#F9474E" }}
-                          className="d-flex flex-nowrap me-3"
-                        >
-                          <a
-                            href="/posts/post/airProgramme"
-                            style={{ color: "#F9474E" }}
-                            className="mb-0 text-decoration-none"
-                          >
-                            Next
-                          </a>
-                          <i className="bi bi-arrow-right ms-1"></i>
-                        </div>
+                        <Image
+                          src="/media/testFeaturedImg.png"
+                          rounded
+                          width="50"
+                          height="40"
+                        />
                       </div>
-                    ) : (
-                      <Spinner animation="border" className="my-3 ms-3" />
-                    )}
+
+                      <div className="ms-2 me-1 me-md-3 ">
+                        <p
+                          className="mb-1 fw-bolder"
+                          style={{ fontSize: "14px" }}
+                        >
+                          ON AIR NOW
+                        </p>
+                      </div>
+
+                      <div
+                        style={{ color: "#F9474E" }}
+                        className="d-flex flex-nowrap me-3"
+                      >
+                        <a
+                          href="/posts/post/airProgramme"
+                          style={{ color: "#F9474E" }}
+                          className="mb-0 text-decoration-none"
+                        >
+                          Next
+                        </a>
+                        <i className="bi bi-arrow-right ms-1"></i>
+                      </div>
+                    </div>
 
                     <div className="d-none d-md-flex align-items-center flex-nowrap ms-auto">
                       <a
@@ -182,11 +143,12 @@ const Header = ({ programmes }) => {
               >
                 <Nav.Link href="/">HOME</Nav.Link>
                 <Nav.Link href="/about">ABOUT US</Nav.Link>
-                <Nav.Link href="/posts/post/airProgramme">PROGRAMME</Nav.Link>
+                <Nav.Link href="/posts/post/airProgramme">
+                  PROGRAMMES PLAY BACK
+                </Nav.Link>
                 <Nav.Link href="/posts/post/news">NEWS</Nav.Link>
                 <Nav.Link href="/posts/post/blog">BLOG</Nav.Link>
-                <Nav.Link href="/posts/post/sport">SPORT</Nav.Link>
-                <Nav.Link href="/privacy-policy">PRIVACY POLICY</Nav.Link>
+                <Nav.Link href="/posts/post/sport">SPORTS</Nav.Link>
                 <Nav.Link href="/presenters">PRESENTERS</Nav.Link>
                 <Nav.Link href="/contact">CONTACT US</Nav.Link>
               </Nav>

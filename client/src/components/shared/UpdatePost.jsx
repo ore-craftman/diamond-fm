@@ -182,7 +182,7 @@ const UpdatePost = ({ post }) => {
                   >
                     <option value="">Select Post Type</option>
                     <option value="news">News</option>
-                    <option value="Blog">Blog</option>
+                    <option value="blog">Blog</option>
                     <option value="sport">Sport</option>
                     <option value="airProgramme">Air Programme</option>
                   </Form.Select>

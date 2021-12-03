@@ -21,7 +21,6 @@ const SinglePost = () => {
   const [singlePost, setSinglePost] = useState(null);
   const [creatorId, setCreatorId] = useState(null);
   const [creator, setCreator] = useState(null);
-  const [programmes, setProgrammes] = useState(null);
   const [postsError, setPostsError] = useState(null);
   const [approvedComments, setApprovedComments] = useState(null);
 
@@ -31,11 +30,6 @@ const SinglePost = () => {
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts);
-        setProgrammes(
-          response.data.posts
-            .reverse()
-            .filter((post) => post.type === "airProgramme")
-        );
       } else {
         setPostsError(response.data.message);
       }
@@ -66,9 +60,32 @@ const SinglePost = () => {
     });
   }, [creatorId]);
 
+  const [playing, setPlaying] = useState(false);
+  const [audioPlayer, setAudioPlayer] = useState(null);
+
+  const playProgramme = (audioAsset) => {
+    let asset = new Audio(audioAsset);
+    setAudioPlayer(asset);
+    setPlaying(true);
+  };
+
+  const stopProgramme = () => {
+    setPlaying(false);
+  };
+
+  useEffect(() => {
+    if (audioPlayer) {
+      if (playing) {
+        audioPlayer.play();
+      } else {
+        audioPlayer.pause();
+      }
+    }
+  }, [audioPlayer, playing]);
+
   return (
     <div>
-      <Header programmes={programmes} />
+      <Header />
 
       {postsError && (
         <Alert variant="warning" className="mx-2">
@@ -133,12 +150,25 @@ const SinglePost = () => {
                     ></div>
 
                     {singlePost.type === "airProgramme" && (
-                      <a
-                        href={singlePost.audio}
-                        className="btn btn-info text-white mb-4"
-                      >
-                        Play Now
-                      </a>
+                      <div className="d-flex flex-nowrap align-items-center">
+                        <button
+                          onClick={() => playProgramme(singlePost.audio)}
+                          className={`btn text-white mb-4 m-2 ${
+                            playing ? "btn-primary" : "btn-info"
+                          }`}
+                        >
+                          {playing ? "Playing..." : "Play Now"}
+                        </button>
+
+                        {playing && (
+                          <button
+                            className="btn btn-warning mb-4 m-2"
+                            onClick={stopProgramme}
+                          >
+                            Pause
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 </section>

@@ -24,7 +24,9 @@ const Home = () => {
 
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
-        setPosts(response.data.posts);
+        setPosts(
+          response.data.posts.filter((post) => post.type !== "airProgramme")
+        );
         setProgrammes(
           response.data.posts
             .reverse()
@@ -39,7 +41,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <Header programmes={programmes} />
+        <Header />
 
         {postsError && (
           <Alert variant="warning" className="mx-2">
@@ -149,7 +151,7 @@ const Home = () => {
         </Container>
 
         <Container className="my-5">
-          <h1 className="fw-bolder">DIAMOND FM TRENDS</h1>
+          <h1 className="fw-bolder">NEWS</h1>
 
           {posts ? (
             <Row>
@@ -192,7 +194,7 @@ const Home = () => {
         <Container>
           <Row className="my-5">
             <Col xs={12} xl={8}>
-              <h1 className="fw-bolder">PREVIOUS PROGRAMMES</h1>
+              <h1 className="fw-bolder">PROGRAMMES PLAY BACK</h1>
 
               {programmes ? (
                 programmes.map((programme, index) => {

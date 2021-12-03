@@ -118,40 +118,6 @@ const NewPost = () => {
         });
     }
   }
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     if (!currentUser.canPublish && createdPost) {
-  //       // const postId = createdPost._id;
-  //       axios
-  //         .get("/users/")
-  //         .then((response) => {
-  //           const adminUsers = response.data.users.filter(
-  //             (user) => user.role === "admin"
-  //           );
-
-  //           adminUsers.forEach((admin) => {
-  //             let dataObj = {
-  //               id: admin._id,
-  //               notifications: [
-  //                 ...admin.notifications,
-  //                 {
-  //                   type: "Pending post",
-  //                   body: createdPost.featuredDesc.slice(0, 25),
-  //                 },
-  //               ],
-  //             };
-  //             axios
-  //               .post("/users/notify", dataObj)
-  //               .then((response) => console.log(response.data))
-  //               .catch((err) => console.log(err));
-  //           });
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //   }
-  // }, [currentUser, createdPost]);
 
   return (
     <div className="bg-white px-1 py-4 me-md-2 my-4">
@@ -200,7 +166,7 @@ const NewPost = () => {
                   >
                     <option value="">Select Post Type</option>
                     <option value="news">News</option>
-                    <option value="Blog">Blog</option>
+                    <option value="blog">Blog</option>
                     <option value="sport">Sport</option>
                     <option value="airProgramme">Air Programme</option>
                   </Form.Select>
