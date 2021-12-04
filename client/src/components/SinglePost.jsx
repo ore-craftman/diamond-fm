@@ -13,6 +13,14 @@ import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
 import Comment from "./shared/Comment";
 import moment from "moment";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TelegramShareButton,
+  TelegramIcon,
+} from "react-share";
 
 const axios = require("axios");
 
@@ -139,6 +147,28 @@ const SinglePost = () => {
 
                     <h4 className="mb-2">{singlePost.title}</h4>
 
+                    <div>
+                      <FacebookShareButton
+                        url={`https://diamondfm.net/posts/${id}`}
+                        className="me-md-2 my-2"
+                      >
+                        <FacebookIcon size="30" round={true} />
+                      </FacebookShareButton>
+
+                      <WhatsappShareButton
+                        url={`https://diamondfm.net/posts/${id}`}
+                        className="me-md-2 my-2"
+                      >
+                        <WhatsappIcon size="30" round="true" />
+                      </WhatsappShareButton>
+
+                      <TelegramShareButton
+                        url={`https://diamondfm.net/posts/${id}`}
+                        className="me-md-2 my-2"
+                      >
+                        <TelegramIcon size="30" round="true" />
+                      </TelegramShareButton>
+                    </div>
                     <div
                       className="text-secondary fs-5 my-4"
                       dangerouslySetInnerHTML={{ __html: singlePost.body }}
