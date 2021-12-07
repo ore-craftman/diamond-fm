@@ -108,27 +108,11 @@ const SinglePost = () => {
             {singlePost !== null ? (
               <div>
                 <section
-                  className="my-4 shadow-sm rounded-4"
+                  className="my-4 shadow-sm py-3 rounded-4"
                   style={{ minWidth: "90%" }}
                 >
-                  <div className="w-100 position-relative">
-                    <Image
-                      src={singlePost.featuredImage}
-                      rounded
-                      style={{ width: "100%" }}
-                    />
-                    {singlePost.type === "airProgramme" && (
-                      <Badge
-                        bg="info position-absolute translate-middle py-2"
-                        style={{ top: "32px", left: "29px" }}
-                      >
-                        <i className="bi h1 text-white bi-mic rounded"></i>
-                      </Badge>
-                    )}
-                  </div>
-
                   <div className="m-4">
-                    <p className="text-secondary mb-0">
+                    <p className="text-secondary mb-1">
                       {moment(
                         new Date(singlePost.createdAt.split("T")[0])
                       ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
@@ -146,7 +130,25 @@ const SinglePost = () => {
                     )}
 
                     <h4 className="mb-2">{singlePost.title}</h4>
+                  </div>
 
+                  <div className="w-100 position-relative">
+                    <Image
+                      src={singlePost.featuredImage}
+                      rounded
+                      style={{ width: "100%", height: "450px" }}
+                    />
+                    {singlePost.type === "airProgramme" && (
+                      <Badge
+                        bg="info position-absolute translate-middle py-2"
+                        style={{ top: "32px", left: "29px" }}
+                      >
+                        <i className="bi h1 text-white bi-mic rounded"></i>
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="m-4">
                     <div>
                       <FacebookShareButton
                         url={`https://diamondfm.net/posts/${id}`}

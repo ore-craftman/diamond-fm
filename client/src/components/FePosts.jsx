@@ -11,6 +11,7 @@ import Weather from "./shared/Weather";
 import Covid from "./shared/Covid";
 import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
+import moment from "moment";
 const axios = require("axios");
 
 const FePosts = () => {
@@ -69,14 +70,25 @@ const FePosts = () => {
                   return (
                     <section
                       key={post._id}
-                      className="my-4 shadow rounded-4"
+                      className="my-4 shadow rounded py-4"
                       style={{ minWidth: "90%" }}
                     >
+                      <div className="m-4">
+                        <p className="text-secondary ">
+                          {moment(
+                            new Date(post.createdAt.split("T")[0])
+                          ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
+                          | {post.comments.length} comments
+                        </p>
+
+                        <h4 className="mb-2">{post.title}</h4>
+                      </div>
+
                       <div className="w-100 position-relative">
                         <Image
                           src={post.featuredImage}
                           rounded
-                          style={{ width: "100%" }}
+                          style={{ width: "100%", height: "450px" }}
                         />
                         {post.type === "airProgramme" && (
                           <Badge
@@ -88,19 +100,13 @@ const FePosts = () => {
                         )}
                       </div>
 
-                      <div className="m-4">
-                        <p>
-                          {post.createdAt.split("T")[0]} |{" "}
-                          {post.comments.length} comments
-                        </p>
-                        <h4 className="mb-2">{post.title}</h4>
-
+                      <div className="mx-4 my-3">
                         <p className="text-secondary">
                           {post.featuredDesc.slice(0, 55) + "..."}
                         </p>
                         <a
                           href={"/posts/" + post._id}
-                          className="btn btn-info text-white mb-4"
+                          className="btn btn-info text-white mb-2"
                         >
                           {post.type === "airProgramme"
                             ? "LISTEN NOW"
