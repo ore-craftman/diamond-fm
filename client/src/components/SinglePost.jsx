@@ -108,10 +108,12 @@ const SinglePost = () => {
             {singlePost !== null ? (
               <div>
                 <section
-                  className="my-4 shadow-sm py-3 rounded-4"
+                  className="my-4 shadow-sm py-2 rounded-4"
                   style={{ minWidth: "90%" }}
                 >
-                  <div className="m-4">
+                  <div className="mx-4 my-1">
+                    <h4 className="mb-2">{singlePost.title}</h4>
+
                     <p className="text-secondary mb-1">
                       {moment(
                         new Date(singlePost.createdAt.split("T")[0])
@@ -128,8 +130,6 @@ const SinglePost = () => {
                         <p></p>
                       </div>
                     )}
-
-                    <h4 className="mb-2">{singlePost.title}</h4>
                   </div>
 
                   <div className="w-100 position-relative">

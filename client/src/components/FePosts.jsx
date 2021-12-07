@@ -70,18 +70,18 @@ const FePosts = () => {
                   return (
                     <section
                       key={post._id}
-                      className="my-4 shadow rounded py-4"
+                      className="my-4 shadow rounded py-2"
                       style={{ minWidth: "90%" }}
                     >
                       <div className="m-4">
+                        <h4 className="mb-2">{post.title}</h4>
+
                         <p className="text-secondary ">
                           {moment(
                             new Date(post.createdAt.split("T")[0])
                           ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
                           | {post.comments.length} comments
                         </p>
-
-                        <h4 className="mb-2">{post.title}</h4>
                       </div>
 
                       <div className="w-100 position-relative">
