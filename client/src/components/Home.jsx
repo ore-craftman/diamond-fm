@@ -25,7 +25,9 @@ const Home = () => {
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(
-          response.data.posts.filter((post) => post.type !== "airProgramme")
+          response.data.posts
+            .reverse()
+            .filter((post) => post.type !== "airProgramme")
         );
         setProgrammes(
           response.data.posts
