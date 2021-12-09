@@ -115,9 +115,9 @@ const SinglePost = () => {
                     <h4 className="mb-2">{singlePost.title}</h4>
 
                     <p className="text-secondary mb-1">
-                      {moment(
-                        new Date(singlePost.createdAt.split("T")[0])
-                      ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
+                      {moment(new Date(singlePost.createdAt)).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}{" "}
                       | {singlePost.comments.length} comments
                     </p>
 

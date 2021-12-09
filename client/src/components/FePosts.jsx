@@ -25,16 +25,12 @@ const FePosts = () => {
     axios.get(`/posts/type/${type}`).then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts.reverse());
-        // setPosts(
-        //   response.data.posts.reverse().filter((post) => post.type === type)
-        // );
       } else {
         setPostsError(response.data.message);
       }
     });
   }, [type]);
 
-  // console.log(posts, type);
   return (
     <div>
       <Header />
@@ -77,9 +73,9 @@ const FePosts = () => {
                         <h4 className="mb-2">{post.title}</h4>
 
                         <p className="text-secondary ">
-                          {moment(
-                            new Date(post.createdAt.split("T")[0])
-                          ).format("MMMM Do YYYY, h:mm:ss a")}{" "}
+                          {moment(new Date(post.createdAt)).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                          )}{" "}
                           | {post.comments.length} comments
                         </p>
                       </div>
