@@ -13,6 +13,7 @@ import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
 import Comment from "./shared/Comment";
 import moment from "moment";
+import MetaTags from "react-meta-tags";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -34,8 +35,6 @@ const SinglePost = () => {
   const [approvedComments, setApprovedComments] = useState(null);
 
   useEffect(() => {
-    document.title = "Post | DiamondFM";
-
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts);
@@ -107,6 +106,21 @@ const SinglePost = () => {
           <Col xs={12} xl={8}>
             {singlePost !== null ? (
               <div>
+                <MetaTags>
+                  <title>
+                    {singlePost.title.slice(0, 20) + "..."} | DiamondFM
+                  </title>
+                  <meta
+                    name="description"
+                    content={singlePost.featuredDesc.slice(0, 45) + "..."}
+                  />
+                  <meta property="og:title" content={singlePost.title} />
+                  <meta
+                    property="og:image"
+                    content={singlePost.featuredImage}
+                  />
+                </MetaTags>
+
                 <section
                   className="my-4 shadow-sm py-2 rounded-4"
                   style={{ minWidth: "90%" }}

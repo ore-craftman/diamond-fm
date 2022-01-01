@@ -12,6 +12,7 @@ import Covid from "./shared/Covid";
 import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
 import moment from "moment";
+import MetaTags from "react-meta-tags";
 const axios = require("axios");
 
 const FePosts = () => {
@@ -20,8 +21,6 @@ const FePosts = () => {
 
   const { type } = useParams();
   useEffect(() => {
-    document.title = `${type[0].toUpperCase() + type.slice(1)} | Diamond FM`;
-
     axios.get(`/posts/type/${type}`).then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts.reverse());
@@ -33,6 +32,9 @@ const FePosts = () => {
 
   return (
     <div>
+      <MetaTags>
+        <title>{`${type[0].toUpperCase() + type.slice(1)} | Diamond FM`}</title>
+      </MetaTags>
       <Header />
 
       <div className="bg-primary my-3 text-white bg-gradient">
