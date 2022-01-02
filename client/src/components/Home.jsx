@@ -42,13 +42,14 @@ const Home = () => {
   return (
     <div>
       <MetaTags>
+        <title>Home | DiamondFM</title>
         <meta property="og:title" content="DiamondFM" />
-        <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+        <meta property="og:image" content="/logo192.png" />
         <meta
           name="description"
           content="We offer exclusive news stories, music and programmes that focus on entertainment, topical issues, community development and corporate social responsibility."
         />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        <link rel="apple-touch-icon" href="/logo192.png" />
       </MetaTags>
       <div>
         <Header />
