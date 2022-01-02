@@ -12,6 +12,7 @@ import Footer from "./shared/Footer";
 import Covid from "./shared/Covid";
 import Weather from "./shared/Weather";
 import Carousel from "react-bootstrap/Carousel";
+import MetaTags from "react-meta-tags";
 const axios = require("axios");
 
 const Home = () => {
@@ -20,8 +21,6 @@ const Home = () => {
   const [postsError, setPostsError] = useState(null);
 
   useEffect(() => {
-    document.title = "Home | DiamondFM";
-
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(
@@ -42,6 +41,15 @@ const Home = () => {
 
   return (
     <div>
+      <MetaTags>
+        <meta property="og:title" content="DiamondFM" />
+        <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+        <meta
+          name="description"
+          content="We offer exclusive news stories, music and programmes that focus on entertainment, topical issues, community development and corporate social responsibility."
+        />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+      </MetaTags>
       <div>
         <Header />
 
