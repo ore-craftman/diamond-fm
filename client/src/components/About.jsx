@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Header from "./shared/Header";
+import MetaTags from "react-meta-tags";
 import Footer from "./shared/Footer";
 
 const axios = require("axios");
@@ -28,6 +29,16 @@ const About = () => {
 
   return (
     <div>
+      <MetaTags>
+        <title>Abput Us | DiamondFM</title>
+        <meta property="og:title" content="DiamondFM" />
+        <meta property="og:image" content="/logo192.png" />
+        <meta
+          name="description"
+          content="We offer exclusive news stories, music and programmes that focus on entertainment, topical issues, community development and corporate social responsibility."
+        />
+        <link rel="apple-touch-icon" href="/logo192.png" />
+      </MetaTags>
       <Header />
 
       {postsError && (

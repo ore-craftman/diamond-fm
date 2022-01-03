@@ -106,21 +106,6 @@ const SinglePost = () => {
           <Col xs={12} xl={8}>
             {singlePost !== null ? (
               <div>
-                <MetaTags>
-                  <title>
-                    {singlePost.title.slice(0, 20) + "..."} | DiamondFM
-                  </title>
-                  <meta
-                    name="description"
-                    content={singlePost.featuredDesc.slice(0, 45) + "..."}
-                  />
-                  <meta property="og:title" content={singlePost.title} />
-                  <meta
-                    property="og:image"
-                    content={singlePost.featuredImage}
-                  />
-                </MetaTags>
-
                 <section
                   className="my-4 shadow-sm py-2 rounded-4"
                   style={{ minWidth: "90%" }}

@@ -4,6 +4,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 
 const port = process.env.PORT || 4000;
 
@@ -34,12 +35,15 @@ app.use(morgan("combined"));
 // Routes
 const usersRoutes = require("./routes/user");
 const postsRoutes = require("./routes/post");
+const clientRoutes = require("./routes/client");
 
 app.use("/posts", postsRoutes);
 app.use("/users", usersRoutes);
 
 // Serve react build on production
 if (process.env.NODE_ENV === "production") {
+  app.use("/", clientRoutes);
+
   app.use(express.static(path.join(__dirname, "/client/build")));
 
   app.get("*", (req, res) => {
