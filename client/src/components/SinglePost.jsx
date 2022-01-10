@@ -13,7 +13,7 @@ import Loader from "./shared/Loader";
 import Footer from "./shared/Footer";
 import Comment from "./shared/Comment";
 import moment from "moment";
-import MetaTags from "react-meta-tags";
+
 import {
   FacebookIcon,
   FacebookShareButton,
