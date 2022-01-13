@@ -18,11 +18,11 @@ router.get("/posts/:id", async (req, res) => {
 
       // replace the special strings with server generated strings
       data = data.replace(
-        /\$OG_TITLE/g,
+        /DIAMOND_FM/g,
         `${post[1].title.slice(0, 20) + "... | DiamondFM"}`
       );
       data = data.replace(
-        /\$OG_DESCRIPTION/g,
+        /NEWS_MUSIC_ENTERTAINMENT/g,
         `${post[1].featuredDesc.slice(0, 45) + "... | DiamondFM"}`
       );
       // result = data.replace(/\$OG_IMAGE/g, post[1].featuredImage);
