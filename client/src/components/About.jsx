@@ -16,8 +16,6 @@ const About = () => {
   const [postsError, setPostsError] = useState(null);
 
   useEffect(() => {
-    document.title = "About Us | DiamondFM";
-
     axios.get("/posts/").then((response) => {
       if (response.data.status) {
         setPosts(response.data.posts);
@@ -30,7 +28,7 @@ const About = () => {
   return (
     <div>
       <MetaTags>
-        <title>Abput Us | DiamondFM</title>
+        <title>About Us | DiamondFM</title>
         <meta property="og:title" content="DiamondFM" />
         <meta property="og:image" content="/logo192.png" />
         <meta
