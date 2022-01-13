@@ -25,8 +25,8 @@ router.get("/posts/:id", async (req, res) => {
         /\$OG_DESCRIPTION/g,
         `${post[1].featuredDesc.slice(0, 45) + "... | DiamondFM"}`
       );
-      result = data.replace(/\$OG_IMAGE/g, post[1].featuredImage);
-      return res.send(result);
+      // result = data.replace(/\$OG_IMAGE/g, post[1].featuredImage);
+      return res.send(data);
     });
   } else {
     res.json({ status: post[0], message: post[1] });
