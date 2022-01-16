@@ -95,7 +95,7 @@ const getById = async (id) => {
         return [false, "No post with the specified id"];
       }
     } catch (err) {
-      return [false, "No user with the specified id"];
+      return [false, "No post with the specified id"];
     }
   } catch (err) {
     console.error(err);

@@ -59,13 +59,15 @@ const SinglePost = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get("/users/" + creatorId).then((response) => {
-      if (response.data.status) {
-        setCreator(response.data.user);
-      } else {
-        console.log(response.data);
-      }
-    });
+    if (creatorId) {
+      axios.get("/users/" + creatorId).then((response) => {
+        if (response.data.status) {
+          setCreator(response.data.user);
+        } else {
+          console.log(response.data);
+        }
+      });
+    }
   }, [creatorId]);
 
   const [playing, setPlaying] = useState(false);

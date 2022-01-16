@@ -1,6 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const postService = require("../services/post");
+const multer = require("multer");
+
+// Multer Storage
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "uploads/");
+  },
+
+  // add back image extention
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  },
+});
+
+// Upload params for Multer
+const upload = multer({
+  storage: storage,
+  limits: {
+    fieldSize: 1023 * 1023 * 3,
+  },
+});
 
 // Get all post /posts/
 router.get("/", async (req, res) => {
@@ -13,25 +34,16 @@ router.get("/", async (req, res) => {
 });
 
 // Create new post, POST /posts/create
-router.post("/create", async (req, res) => {
-  const {
-    title,
-    body,
-    type,
-    createdBy,
-    featuredImage,
-    programmeDate,
-    featuredDesc,
-    pending,
-    comments,
-  } = req.body;
+router.post("/create", upload.single("featuredImage"), async (req, res) => {
+  const { title, body, type, createdBy, programmeDate, featuredDesc, pending } =
+    req.body;
 
   const currentDate = new Date();
   postData = {
     title,
     body,
     type,
-    featuredImage,
+    featuredImage: "/" + req.file.filename,
     featuredDesc,
     createdBy,
     audio: req.body.audio ? req.body.audio : null,

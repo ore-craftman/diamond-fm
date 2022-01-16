@@ -48,41 +48,87 @@ const NewPost = () => {
       setPostBodyEmpty(true);
       setFeaturedImgEmpty(true);
     } else {
-      const reader = new FileReader();
+      // const reader = new FileReader();
 
       // Create new post
-      let postData = {
-        title: postTitle,
-        type: postType,
-        body: postBody,
-        audio: audioLink !== "" ? audioLink : null,
-        createdBy: currentUser._id,
-        featuredDesc,
-        programmeDate: programmeDate !== "" ? programmeDate : null,
-        pending: currentUser.canPublish === true ? false : true,
+      // let postData = {
+      //   title: postTitle,
+      //   type: postType,
+      //   body: postBody,
+      //   audio: audioLink !== "" ? audioLink : null,
+      //   createdBy: currentUser._id,
+      //   featuredDesc,
+      //   featuredImage: featuredImg,
+      //   programmeDate: programmeDate !== "" ? programmeDate : null,
+      //   pending: currentUser.canPublish === true ? false : true,
+      // };
+
+      const postData = new FormData();
+      postData.append("featuredImage", featuredImg);
+      postData.append("title", postTitle);
+      postData.append("type", postType);
+      postData.append("body", postBody);
+      postData.append("audio", audioLink !== "" ? audioLink : null);
+      postData.append("createdBy", currentUser._id);
+      postData.append("featuredDesc", featuredDesc);
+      postData.append(
+        "pending",
+        currentUser.canPublish === true ? false : true
+      );
+      postData.append(
+        "programmeDate",
+        programmeDate !== "" ? programmeDate : null
+      );
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
       };
 
-      reader.addEventListener("load", () => {
-        postData.featuredImage = reader.result;
-        axios
-          .post("/posts/create", postData)
-          .then((response) => {
-            if (response.data && response.data.status) {
-              setCreatedPost(response.data.post);
-            } else {
-              setCreatePostError(
-                response.data.message
-                  ? response.data.message
-                  : "Oops.. network error"
-              );
-              setSubmitting(false);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-      reader.readAsDataURL(featuredImg);
+      axios
+        .post("/posts/create", postData, config)
+        .then((response) => {
+          if (response.data && response.data.status) {
+            setCreatedPost(response.data.post);
+          } else {
+            setCreatePostError(
+              response.data.message
+                ? response.data.message
+                : "Oops.. network error"
+            );
+            setSubmitting(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // for (let pair of postData.entries()) {
+      //   console.log(pair);
+      // }
+
+      // reader.addEventListener("load", () => {
+      //   postData.featuredImage = reader.result;
+      //   axios
+      //     .post("/posts/create", postData)
+      //     .then((response) => {
+      //       if (response.data && response.data.status) {
+      //         setCreatedPost(response.data.post);
+      //       } else {
+      //         setCreatePostError(
+      //           response.data.message
+      //             ? response.data.message
+      //             : "Oops.. network error"
+      //         );
+      //         setSubmitting(false);
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //     });
+      // });
+      // reader.readAsDataURL(featuredImg);
     }
   };
 
@@ -143,7 +189,7 @@ const NewPost = () => {
       {!createdPost && (
         <div>
           <h4>New Post</h4>
-          <Form onSubmit={sumitHandler}>
+          <Form onSubmit={sumitHandler} name="postForm">
             <Row>
               <Col xs={8}>
                 <Form.Group controlId="postTitle">
@@ -152,6 +198,7 @@ const NewPost = () => {
                     placeholder="Add Title"
                     required={true}
                     value={postTitle}
+                    name="postTitle"
                     onChange={(e) => setPostTitle(e.target.value)}
                   />
                 </Form.Group>
@@ -163,6 +210,7 @@ const NewPost = () => {
                     onChange={(e) => setPostType(e.target.value)}
                     required={true}
                     value={postType}
+                    name="postType"
                   >
                     <option value="">Select Post Type</option>
                     <option value="news">News</option>
@@ -181,6 +229,7 @@ const NewPost = () => {
                     <Form.Label>Select Programme Date</Form.Label>
                     <DatePicker
                       selected={programmeDate}
+                      name="programmeDate"
                       onChange={(date) => setProgrammeDate(date)}
                       showTimeSelect
                       timeIntervals={10}
@@ -198,6 +247,7 @@ const NewPost = () => {
                       placeholder="https://streams.radiomast.io/..."
                       required={true}
                       onChange={(e) => setAudioLink(e.target.value)}
+                      name="audioLink"
                       value={audioLink}
                     />
                   </Form.Group>
@@ -214,6 +264,7 @@ const NewPost = () => {
                     placeholder="Post description"
                     required={true}
                     value={featuredDesc}
+                    name="featuredDesc"
                     onChange={(e) => setFeaturedDesc(e.target.value)}
                   />
                 </Form.Group>
@@ -223,6 +274,7 @@ const NewPost = () => {
                   <Form.Label>Featured Image</Form.Label>
                   <Form.Control
                     type="file"
+                    name="featuredImage"
                     onChange={(e) => setFeaturedImg(e.target.files[0])}
                   />
                 </Form.Group>
@@ -239,6 +291,7 @@ const NewPost = () => {
                 theme="snow"
                 placeholder="Post Content... start writting"
                 onChange={setPostBody}
+                name="postBody"
               />
 
               {postBodyEmpty && (
