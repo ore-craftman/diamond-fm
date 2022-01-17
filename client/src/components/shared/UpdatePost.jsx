@@ -42,50 +42,45 @@ const UpdatePost = ({ post }) => {
 
   const [updatePostError, setUpdatePostError] = useState(null);
   const [updatedPost, setUpdatedPost] = useState(false);
+  const [notImage, setNotImage] = useState(false);
 
   const sumitHandler = (e) => {
     e.preventDefault();
     setSubmitting(true);
+    let extension;
+    if (typeof featuredImg === "string") {
+      extension = featuredImg.split(".")[1].toLowerCase();
+    } else if (typeof featuredImg === "object") {
+      extension = featuredImg.name.split(".")[1].toLowerCase();
+    }
 
-    // Reader to convert Image file to base64
-    const reader = new FileReader();
+    if (extension === "jpg" || extension === "jpeg" || extension === "png") {
+      console.log(extension);
 
-    let postData = {
-      id: post._id,
-      title: postTitle,
-      type: postType,
-      body: postBody,
-      audio: audioLink !== "" ? audioLink : null,
-      createdBy: creator,
-      featuredDesc,
-      programmeDate: programmeDate !== "" ? programmeDate : null,
-      pending: currentUser.canPublish,
-    };
-    // console.log(postData);
-
-    // convert image to base 64 if updated and add it to postData
-    if (typeof featuredImg !== "string") {
-      reader.addEventListener("load", () => {
-        postData.featuredImage = reader.result;
-        axios
-          .post("/posts/update", postData)
-          .then((response) => {
-            if (response.data && response.data.status) {
-              setUpdatedPost(true);
-            } else {
-              setUpdatePostError("Oops.. error updating post");
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-      reader.readAsDataURL(featuredImg);
-      setSubmitting(false);
-    } else {
-      postData.featuredImage = featuredImg;
+      const postData = new FormData();
+      postData.append("id", post._id);
+      postData.append("featuredImage", featuredImg);
+      postData.append("title", postTitle);
+      postData.append("type", postType);
+      postData.append("body", postBody);
+      postData.append("audio", audioLink !== "" ? audioLink : null);
+      postData.append("createdBy", creator);
+      postData.append("featuredDesc", featuredDesc);
+      postData.append(
+        "pending",
+        currentUser.canPublish === true ? false : true
+      );
+      postData.append(
+        "programmeDate",
+        programmeDate !== "" ? programmeDate : null
+      );
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
       axios
-        .post("/posts/update", postData)
+        .post("/posts/update", postData, config)
         .then((response) => {
           if (response.data && response.data.status) {
             setUpdatedPost(true);
@@ -96,8 +91,11 @@ const UpdatePost = ({ post }) => {
         .catch((err) => {
           console.log(err);
         });
-
       setSubmitting(false);
+    } else {
+      setNotImage(true);
+      setSubmitting(false);
+      console.log("NOT IMG", extension);
     }
   };
 
@@ -168,6 +166,7 @@ const UpdatePost = ({ post }) => {
                     placeholder="Add Title"
                     required={true}
                     value={postTitle}
+                    name="postTitle"
                     onChange={(e) => setPostTitle(e.target.value)}
                   />
                 </Form.Group>
@@ -179,6 +178,7 @@ const UpdatePost = ({ post }) => {
                     onChange={(e) => setPostType(e.target.value)}
                     required={true}
                     value={postType}
+                    name="postType"
                   >
                     <option value="">Select Post Type</option>
                     <option value="news">News</option>
@@ -199,6 +199,7 @@ const UpdatePost = ({ post }) => {
                       selected={programmeDate}
                       onChange={(date) => setProgrammeDate(date)}
                       showTimeSelect
+                      name="programmeDate"
                       value={programmeDate}
                       timeIntervals={10}
                       dateFormat="Pp"
@@ -216,6 +217,7 @@ const UpdatePost = ({ post }) => {
                       required={true}
                       onChange={(e) => setAudioLink(e.target.value)}
                       value={audioLink}
+                      name="audioLink"
                     />
                   </Form.Group>
                 </Col>
@@ -231,6 +233,7 @@ const UpdatePost = ({ post }) => {
                     placeholder="Post description"
                     required={true}
                     value={featuredDesc}
+                    name="featuredDesc"
                     onChange={(e) => setFeaturedDesc(e.target.value)}
                   />
                 </Form.Group>
@@ -240,12 +243,20 @@ const UpdatePost = ({ post }) => {
                   <Form.Label>Featured Image</Form.Label>
                   <Form.Control
                     type="file"
+                    name="featuredImage"
+                    accept="image/png,image/jpeg"
                     onChange={(e) => setFeaturedImg(e.target.files[0])}
                   />
                 </Form.Group>
                 {featuredImg.length < 1 && (
                   <Alert variant="danger" className="m-1">
                     Choose featured Image
+                  </Alert>
+                )}
+
+                {notImage && (
+                  <Alert variant="danger" className="my-2">
+                    featured Image should be jpg, jpeg or png
                   </Alert>
                 )}
               </Col>
@@ -257,6 +268,7 @@ const UpdatePost = ({ post }) => {
                 placeholder="Post Content... start writting"
                 onChange={setPostBody}
                 value={postBody}
+                name="postBody"
               />
 
               {postBody.length <= 11 && (

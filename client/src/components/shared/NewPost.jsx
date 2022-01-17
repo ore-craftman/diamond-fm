@@ -39,30 +39,21 @@ const NewPost = () => {
   const [createdPost, setCreatedPost] = useState(null);
   const [createPostError, setCreatePostError] = useState(null);
   const [featuredDesc, setFeaturedDesc] = useState("");
+  const [notImage, setNotImage] = useState(false);
 
   const sumitHandler = (e) => {
     e.preventDefault();
     setSubmitting(true);
+
     if (postBody === "" || featuredImg === "") {
       setSubmitting(false);
       setPostBodyEmpty(true);
       setFeaturedImgEmpty(true);
-    } else {
-      // const reader = new FileReader();
-
-      // Create new post
-      // let postData = {
-      //   title: postTitle,
-      //   type: postType,
-      //   body: postBody,
-      //   audio: audioLink !== "" ? audioLink : null,
-      //   createdBy: currentUser._id,
-      //   featuredDesc,
-      //   featuredImage: featuredImg,
-      //   programmeDate: programmeDate !== "" ? programmeDate : null,
-      //   pending: currentUser.canPublish === true ? false : true,
-      // };
-
+    } else if (
+      featuredImg.name.split(".")[1].toLowerCase() === "jpg" ||
+      featuredImg.name.split(".")[1].toLowerCase() === "jpeg" ||
+      featuredImg.name.split(".")[1].toLowerCase() === "png"
+    ) {
       const postData = new FormData();
       postData.append("featuredImage", featuredImg);
       postData.append("title", postTitle);
@@ -103,32 +94,10 @@ const NewPost = () => {
         .catch((err) => {
           console.log(err);
         });
-
-      // for (let pair of postData.entries()) {
-      //   console.log(pair);
-      // }
-
-      // reader.addEventListener("load", () => {
-      //   postData.featuredImage = reader.result;
-      //   axios
-      //     .post("/posts/create", postData)
-      //     .then((response) => {
-      //       if (response.data && response.data.status) {
-      //         setCreatedPost(response.data.post);
-      //       } else {
-      //         setCreatePostError(
-      //           response.data.message
-      //             ? response.data.message
-      //             : "Oops.. network error"
-      //         );
-      //         setSubmitting(false);
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      // });
-      // reader.readAsDataURL(featuredImg);
+    } else {
+      setNotImage(true);
+      setSubmitting(false);
+      console.log("NOT IMG", featuredImg.name.split(".")[1].toLowerCase());
     }
   };
 
@@ -275,12 +244,19 @@ const NewPost = () => {
                   <Form.Control
                     type="file"
                     name="featuredImage"
+                    accept="image/png,image/jpeg"
                     onChange={(e) => setFeaturedImg(e.target.files[0])}
                   />
                 </Form.Group>
                 {featuredImgEmpty && (
                   <Alert variant="danger" className="m-1">
                     Choose featured Image
+                  </Alert>
+                )}
+
+                {notImage && (
+                  <Alert variant="danger" className="my-2">
+                    featured Image should be jpg, jpeg or png
                   </Alert>
                 )}
               </Col>

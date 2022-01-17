@@ -11,7 +11,8 @@ const storage = multer.diskStorage({
 
   // add back image extention
   filename: function (req, file, callback) {
-    callback(null, Date.now() + file.originalname);
+    const name = file.originalname.split(" ").join("");
+    callback(null, Date.now() + name);
   },
 });
 
@@ -97,7 +98,7 @@ router.post("/add-comment", async (req, res) => {
 });
 
 // Update post
-router.post("/update", async (req, res) => {
+router.post("/update", upload.single("featuredImage"), async (req, res) => {
   const {
     id,
     title,
@@ -116,7 +117,7 @@ router.post("/update", async (req, res) => {
     title,
     body,
     type,
-    featuredImage,
+    featuredImage: req.file ? "/" + req.file.filename : featuredImage,
     featuredDesc,
     createdBy,
     audio,
