@@ -47,11 +47,14 @@ const UpdatePost = ({ post }) => {
   const sumitHandler = (e) => {
     e.preventDefault();
     setSubmitting(true);
+
     let extension;
     if (typeof featuredImg === "string") {
-      extension = featuredImg.split(".")[1].toLowerCase();
+      const arr = featuredImg.split(".");
+      extension = arr[arr.length - 1].toLowerCase();
     } else if (typeof featuredImg === "object") {
-      extension = featuredImg.name.split(".")[1].toLowerCase();
+      const arr = featuredImg.name.split(".");
+      extension = arr[arr.length - 1].toLowerCase();
     }
 
     if (extension === "jpg" || extension === "jpeg" || extension === "png") {

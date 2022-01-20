@@ -44,15 +44,17 @@ const NewPost = () => {
   const sumitHandler = (e) => {
     e.preventDefault();
     setSubmitting(true);
+    const arr = featuredImg.name.split(".");
+    const extention = arr[arr.length - 1].toLowerCase();
 
     if (postBody === "" || featuredImg === "") {
       setSubmitting(false);
       setPostBodyEmpty(true);
       setFeaturedImgEmpty(true);
     } else if (
-      featuredImg.name.split(".")[1].toLowerCase() === "jpg" ||
-      featuredImg.name.split(".")[1].toLowerCase() === "jpeg" ||
-      featuredImg.name.split(".")[1].toLowerCase() === "png"
+      extention === "jpg" ||
+      extention === "jpeg" ||
+      extention === "png"
     ) {
       const postData = new FormData();
       postData.append("featuredImage", featuredImg);
