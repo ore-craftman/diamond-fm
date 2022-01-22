@@ -1,18 +1,22 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const postService = require("../services/post");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 // Multer Storage
-const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "uploads/");
-  },
-
-  // add back image extention
-  filename: function (req, file, callback) {
-    const name = file.originalname.split(" ").join("");
-    callback(null, Date.now() + name);
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "DIAMOND_FM",
   },
 });
 
@@ -39,12 +43,13 @@ router.post("/create", upload.single("featuredImage"), async (req, res) => {
   const { title, body, type, createdBy, programmeDate, featuredDesc, pending } =
     req.body;
 
+  console.log(req.file.path);
   const currentDate = new Date();
   postData = {
     title,
     body,
     type,
-    featuredImage: "/" + req.file.filename,
+    featuredImage: req.file.path,
     featuredDesc,
     createdBy,
     audio: req.body.audio ? req.body.audio : null,
@@ -117,7 +122,7 @@ router.post("/update", upload.single("featuredImage"), async (req, res) => {
     title,
     body,
     type,
-    featuredImage: req.file ? "/" + req.file.filename : featuredImage,
+    featuredImage: req.file ? req.file.path : featuredImage,
     featuredDesc,
     createdBy,
     audio,
