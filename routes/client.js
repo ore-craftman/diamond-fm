@@ -25,12 +25,7 @@ router.get("/posts/:id", async (req, res) => {
         /NEWS_MUSIC_ENTERTAINMENT/g,
         `${post[1].featuredDesc.slice(0, 45) + "... | DiamondFM"}`
       );
-      result = data.replace(
-        /\$OG_IMAGE/g,
-        post[1].featuredImage.startsWith("data")
-          ? post[1].featuredImage
-          : "https://diamondfm.net" + post[1].featuredImage
-      );
+      result = data.replace(/\$OG_IMAGE/g, post[1].featuredImage);
       return res.send(result);
     });
   } else {
