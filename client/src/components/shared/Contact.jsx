@@ -183,16 +183,22 @@ const Contact = ({ onlyContact }) => {
             <div className="border-start px-2 my-4 my-md-1">
               <h4>Dial</h4>
               <a
-                href="tel:+2349136556952"
+                href="tel:+2347063370657"
                 className="text-secondary d-block text-decoration-none"
               >
-                +234 913 655 6952
+                +234 706 337 0657 (Lagos)
               </a>
               <a
-                href="tel:+2346952913655"
+                href="tel:+2348128286078"
                 className="text-secondary d-block text-decoration-none"
               >
-                +234 695 291 3655
+                +234 812 828 6078 (Ilorin)
+              </a>
+              <a
+                href="tel:+2349129294332 "
+                className="text-secondary d-block text-decoration-none"
+              >
+                +234 912 929 4332 (Ilorin)
               </a>
             </div>
           </div>
