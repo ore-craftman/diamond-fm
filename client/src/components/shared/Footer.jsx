@@ -1,28 +1,30 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
+// import Image from "react-bootstrap/Image";
 import { useState } from "react";
 
-const Footer = ({ posts }) => {
+// { posts } as Prop
+const Footer = () => {
   const [year] = useState(new Date().toISOString());
   return (
     <div className="mt-5">
-      {posts && (
+      {/* Was {posts && render} */}
+      {true && (
         <div
           className="py-5"
           style={{
             backgroundImage: "url('/media/calltoAct.png')",
             backgroundPosition: "center center",
             backgroundSize: "cover",
-            minHeight: "40vh",
+            // minHeight: "40vh",
           }}
         >
           <Container>
-            <h1 className="fw-bolder text-center text-white">DIAMOND FM</h1>
+            <h4 className="fw-bold text-center text-white">DIAMOND FM</h4>
             <p className="text-center text-white">Instagram @diamond887fm</p>
 
-            <Row>
+            {/* <Row>
               {posts.slice(0, 4).map((post) => {
                 return (
                   <Col className="" xs={12} md={4} xl={3}>
@@ -40,7 +42,7 @@ const Footer = ({ posts }) => {
                   </Col>
                 );
               })}
-            </Row>
+            </Row> */}
           </Container>
         </div>
       )}

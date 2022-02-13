@@ -137,7 +137,11 @@ const SinglePost = () => {
                     <Image
                       src={singlePost.featuredImage}
                       rounded
-                      style={{ width: "100%", height: "450px" }}
+                      style={{
+                        width: "100%",
+                        maxHeight: "450px",
+                        height: "100%",
+                      }}
                     />
                     {singlePost.type === "airProgramme" && (
                       <Badge

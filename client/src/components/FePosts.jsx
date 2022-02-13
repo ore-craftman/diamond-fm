@@ -86,7 +86,11 @@ const FePosts = () => {
                         <Image
                           src={post.featuredImage}
                           rounded
-                          style={{ width: "100%", height: "450px" }}
+                          style={{
+                            width: "100%",
+                            maxHeight: "450px",
+                            height: "100%",
+                          }}
                         />
                         {post.type === "airProgramme" && (
                           <Badge
